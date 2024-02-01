@@ -23,7 +23,7 @@ class BookView(ModelViewSet):
     serializer_class = BookSerializer
     permission_classes = [CanViewBook]  
     filter_backends = [SearchFilter]
-    search_fields = ['title','author__name']
+    search_fields = ['title','author_name']
     
     def get_permissions(self):
         if self.action in ['create', 'update', 'partial_update']:
@@ -36,13 +36,13 @@ class BookView(ModelViewSet):
         search_query = self.request.query_params.get('search', None)
 
         if search_query:
-            # Filter books by title or author name
+            # to filter books by title or author name
             
             filtered_books = self.queryset.filter(
                 models.Q(title__icontains=search_query) | models.Q(author__name__icontains=search_query)
             )
             
-            # Check availability for each book
+            #  to check availability for each book
             available_books = []
             for book in filtered_books:
                 if book.is_available_for_issue():
