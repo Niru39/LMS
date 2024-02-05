@@ -19,15 +19,15 @@ class CanViewBook(BasePermission):
 class CanIssueBook(BasePermission):
     def has_permission(self, request, view):
         
-        return request.user.user_type in ['Student', 'Teacher']
+        return request.user.user_type in ['Student', 'Teacher','Librarian']
 
 class CanReturnBook(BasePermission):
     def has_permission(self, request, view):
         
-        return request.user.user_type in ['Student', 'Teacher']
+        return request.user.user_type in ['Student', 'Teacher','Librarian']
 
 class CanReserveBook(BasePermission):
     def has_permission(self, request, view):
         
-        return request.user.user_type in ['Student', 'Teacher']
+        return request.user.user_type in ['Student', 'Teacher','Librarian']
 
